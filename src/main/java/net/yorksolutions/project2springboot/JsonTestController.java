@@ -1,7 +1,9 @@
 package net.yorksolutions.project2springboot;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.http.MediaType;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 public class JsonTestController {
@@ -9,9 +11,19 @@ public class JsonTestController {
     public JsonTestController(JsonTestService jsonTestService){
         this.jsonTestService = jsonTestService;
     };
-    @GetMapping("/test")
-    public String test(){
-        return this.jsonTestService.test();
-    }
+//    @RequestMapping(
+//            method = RequestMethod.GET,
+//            value = "/ip-address",
+//            produces = MediaType.TEXT_PLAIN_VALUE
+//    )
+//    @ResponseBody
+//    public String getIpAddress(HttpServletRequest request){
+//        String ip = JsonTestService.getRequestIp(request);
+//        return "Your IP Address is: " + ip;
+//    }
+    @GetMapping("/ip-address")
+    public  String getIpAddress(){
+        return JsonTestService.getRequestIp();
+}
 
 }
