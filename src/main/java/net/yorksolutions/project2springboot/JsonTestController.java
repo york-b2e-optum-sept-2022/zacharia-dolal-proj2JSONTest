@@ -1,29 +1,45 @@
 package net.yorksolutions.project2springboot;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 
 @RestController
 public class JsonTestController {
     private JsonTestService jsonTestService;
-    public JsonTestController(JsonTestService jsonTestService){
+    HttpServletRequest request;
+
+
+
+    public JsonTestController(JsonTestService jsonTestService) {
         this.jsonTestService = jsonTestService;
-    };
-//    @RequestMapping(
-//            method = RequestMethod.GET,
-//            value = "/ip-address",
-//            produces = MediaType.TEXT_PLAIN_VALUE
-//    )
-//    @ResponseBody
-//    public String getIpAddress(HttpServletRequest request){
-//        String ip = JsonTestService.getRequestIp(request);
-//        return "Your IP Address is: " + ip;
-//    }
+    }
+
+
     @GetMapping("/ip-address")
-    public  String getIpAddress(){
-        return JsonTestService.getRequestIp();
-}
+    public String getIpAddress() {
+        return this.jsonTestService.getRequestIp();
+    }
+
+    @GetMapping("/headers")
+    public HashMap getAllheaders(@RequestHeader Map<String,String> headers){
+        HashMap map = new HashMap();
+        headers.forEach((key,value) ->{
+            map.put(key,value);
+            System.out.println("Header Name: "+key+" Header Value: "+value);
+        });
+        return map;
+    }
+
 
 }

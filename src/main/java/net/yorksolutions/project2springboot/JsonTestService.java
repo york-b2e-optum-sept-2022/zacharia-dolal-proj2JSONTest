@@ -1,14 +1,16 @@
 package net.yorksolutions.project2springboot;
-
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestHeader;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import javax.servlet.http.HttpServletRequest;
+
 
 @Service
 public class JsonTestService {
 
-    public static String getRequestIp() {
+    public  String getRequestIp() {
         InetAddress ip;
 
         String hostName = "";
