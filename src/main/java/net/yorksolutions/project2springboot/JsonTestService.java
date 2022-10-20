@@ -1,6 +1,7 @@
 package net.yorksolutions.project2springboot;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import java.text.SimpleDateFormat;
  import java.time.LocalDate;
@@ -30,6 +31,15 @@ public class JsonTestService {
         return hostName;
     }
 
+    @GetMapping("/headers")
+    public HashMap getAllheaders(Map<String,String> headers){
+        HashMap map = new HashMap();
+        headers.forEach((key,value) ->{
+            map.put(key,value);
+            System.out.println("Header Name: "+key+" Header Value: "+value);
+        });
+        return map;
+    }
 
 
     public HashMap<String,LocalDate> getCurrentTime(){
@@ -38,12 +48,6 @@ public class JsonTestService {
         HashMap map = new HashMap();
         map.put("Current Date", localDate);
         map.put("Current Time", localtime);
-//
-//
-//        Date date = new Date();
-//        String strDateFormat = "hh:MM:SS a";
-//        DateFormat dateFormat = new SimpleDateFormat(strDateFormat);
-//        String formattedDate = dateFormat.format(date);
         return map;
 
 
