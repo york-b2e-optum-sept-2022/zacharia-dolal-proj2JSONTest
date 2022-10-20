@@ -40,6 +40,10 @@ public class JsonTestController {
         });
         return map;
     }
+    @GetMapping("date")
+    public HashMap getCurrentDate(){
+        return this.jsonTestService.getCurrentTime();
+    }
 
 
 }
